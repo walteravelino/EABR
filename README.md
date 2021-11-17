@@ -1,4 +1,4 @@
-# Wltr Doc Validate
+# EABR Functions
 <a href="https://pypi.org/project/eabr-functions/">
   <img alt="PyPI" src="https://img.shields.io/pypi/v/eabr-functions">
 </a>
