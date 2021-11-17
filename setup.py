@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="eabr-functions",
-    version="1.0.0",
+    version="2.0.0",
     author="Walter José Avelino da Silva",
     author_email="walter.avelin@gmail.com",
     description="EABR Functions",
