@@ -53,7 +53,7 @@ class EabrDatabases(object):
             self.ddb_port = int(ddb_port)
             self.ddb_user = urllib.parse.quote_plus(ddb_user)
             self.ddb_pwd = urllib.parse.quote_plus(ddb_pwd)
-            self.ddb_ssl = bool(ddb_ssl),
+            self.ddb_ssl = ddb_ssl,
             self.ddb_ssl_cert = ddb_ssl_cert,
             self.ddb_public_key = ddb_public_key
 
