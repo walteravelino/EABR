@@ -2,24 +2,28 @@ from unicodedata import normalize
 
 
 class EabrCleansing(object):
-    def __init__(self, name):
-        self.name = name
+    class Normalize:
+        def __init__(self, string):
+            self.string = string
 
-    def normalize_name(self):
-        try:
-            rem = normalize('NFKD', self.name) \
-                .encode('ASCII', 'ignore') \
-                .decode('ASCII')
-            return rem
-        except:
-            pass
+        def string_item(self):
+            try:
+                rem = normalize('NFKD', self.string) \
+                    .encode('ASCII', 'ignore') \
+                    .decode('ASCII')
+                return rem
+            except:
+                pass
 
-    def ajust_name(self):
-        prep_br = ['de', 'do', 'da', 'dos', 'das']
+    class Prepositions:
+        def __init__(self, string, prepositions):
+            self.string = string
+            self.prepositions = prepositions
 
-        try:
-            ajust_name = (' '.join(word if word in prep_br else word.title()
-                                   for word in self.name.capitalize().split(' ')))
-            return ajust_name
-        except:
-            pass
+        def string_item(self):
+            try:
+                ajust_name = (' '.join(word if word in self.prepositions else word.title()
+                                       for word in self.string.capitalize().split(' ')))
+                return ajust_name
+            except:
+                pass
