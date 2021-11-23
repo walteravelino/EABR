@@ -6,7 +6,7 @@ class EabrCleansing(object):
         def __init__(self, string):
             self.string = string
 
-        def string_item(self):
+        def execute(self):
             try:
                 rem = normalize('NFKD', self.string) \
                     .encode('ASCII', 'ignore') \
@@ -20,7 +20,7 @@ class EabrCleansing(object):
             self.string = string
             self.prepositions = prepositions
 
-        def string_item(self):
+        def execute(self):
             try:
                 ajust_name = (' '.join(word if word in self.prepositions else word.title()
                                        for word in self.string.capitalize().split(' ')))
