@@ -47,11 +47,15 @@ class EabrDatabases(object):
 
     class DocumentDB:
         def __init__(self, ddb_host, ddb_port,
-                     ddb_user, ddb_pwd):
+                     ddb_user, ddb_pwd, ddb_ssl,
+                     ddb_ssl_cert, ddb_public_key):
             self.ddb_host = ddb_host
             self.ddb_port = int(ddb_port)
             self.ddb_user = urllib.parse.quote_plus(ddb_user)
             self.ddb_pwd = urllib.parse.quote_plus(ddb_pwd)
+            self.ddb_ssl = ddb_ssl,
+            self.ddb_ssl_cert = ddb_ssl_cert,
+            self.ddb_public_key = ddb_public_key
 
         def conn_ddb(self):
             try:
@@ -59,7 +63,11 @@ class EabrDatabases(object):
 
                 cnxn = engine('mongodb://%s:%s@%s:%s'
                               % (self.ddb_user, self.ddb_pwd,
-                                 self.ddb_host, self.ddb_port))
+                                 self.ddb_host, self.ddb_port),
+                              ssl=self.ddb_ssl,
+                              ssl_cert_reqs=self.ddb_ssl_cert,
+                              ssl_ca_certs=self.ddb_public_key
+                              )
 
             except ValueError as e:
                 print(e)
