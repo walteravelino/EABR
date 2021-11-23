@@ -1,3 +1,4 @@
+import ssl
 import json
 import boto3
 import base64
@@ -47,12 +48,12 @@ class EabrDatabases(object):
 
     class DocumentDB:
         def __init__(self, ddb_host, ddb_port, ddb_user,
-                     ddb_pwd, ddb_ssl_cert, ddb_public_key):
+                     ddb_pwd, ddb_public_key):
             self.ddb_host = ddb_host
             self.ddb_port = int(ddb_port)
             self.ddb_user = urllib.parse.quote_plus(ddb_user)
             self.ddb_pwd = urllib.parse.quote_plus(ddb_pwd)
-            self.ddb_ssl_cert = ddb_ssl_cert,
+
             self.ddb_public_key = ddb_public_key
 
         def conn_ddb(self):
@@ -62,7 +63,8 @@ class EabrDatabases(object):
                 cnxn = engine('mongodb://%s:%s@%s:%s'
                               % (self.ddb_user, self.ddb_pwd,
                                  self.ddb_host, self.ddb_port),
-                              ssl_cert_reqs=self.ddb_ssl_cert,
+                              ssl=True,
+                              ssl_cert_reqs=ssl.CERT_REQUIRED,
                               ssl_ca_certs=self.ddb_public_key
                               )
 
