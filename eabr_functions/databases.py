@@ -63,9 +63,8 @@ class EabrDatabases(object):
                 cnxn = engine('mongodb://%s:%s@%s:%s'
                               % (self.ddb_user, self.ddb_pwd,
                                  self.ddb_host, self.ddb_port),
-                              ssl=True,
-                              ssl_cert_reqs=ssl.CERT_REQUIRED,
-                              ssl_ca_certs=self.ddb_public_key
+                              tls=True,
+                              tlsCAFile=self.ddb_public_key
                               )
 
             except ValueError as e:
