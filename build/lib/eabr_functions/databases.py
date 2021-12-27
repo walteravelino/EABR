@@ -64,8 +64,7 @@ class EabrDatabases(object):
                               % (self.ddb_user, self.ddb_pwd,
                                  self.ddb_host, self.ddb_port),
                               tls=True,
-                              tlsCAFile=ssl.CERT_REQUIRED,
-                              ssl_ca_certs=self.ddb_public_key
+                              tlsCAFile=self.ddb_public_key
                               )
 
             except ValueError as e:
