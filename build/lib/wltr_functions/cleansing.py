@@ -1,7 +1,7 @@
 from unicodedata import normalize
 
 
-class EabrCleansing(object):
+class Cleansing(object):
     class Normalize:
         def __init__(self, string):
             self.string = string
