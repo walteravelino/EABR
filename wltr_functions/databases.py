@@ -1,17 +1,8 @@
-import ssl
-import json
-import base64
 import pymongo
 import pymssql
 import psycopg2
 import cx_Oracle
 import urllib.parse
-from delta import *
-from delta.tables import *
-from pyspark.sql import SparkSession
-from pyspark.sql.types import *
-from pyspark.sql.functions import *
-from pyspark import SparkContext as sc
 
 
 class Databases(object):
@@ -28,6 +19,7 @@ class Databases(object):
                                          dsn=self.oracle_dsn)
             except ValueError as e:
                 print(e)
+
             return cnxn
 
     class Redshift:
@@ -48,6 +40,7 @@ class Databases(object):
                                         password=self.rs_pwd)
             except ValueError as e:
                 print(e)
+
             return cnxn
 
     class DocumentDB:
@@ -73,6 +66,7 @@ class Databases(object):
 
             except ValueError as e:
                 print(e)
+
             return cnxn
 
     class SQLServer:
@@ -91,33 +85,35 @@ class Databases(object):
                                        database=self.sqls_db)
             except ValueError as e:
                 print(e)
+
             return cnxn
 
 
 class SparkDatabases(object):
-    def __init__(self, host, port, service, user, pwd, arg):
-        self.host = host
-        self.port = port
-        self.service = service
-        self.user = user
-        self.pwd = pwd
-        self.arg = arg
+    class Oracle:
+        def __init__(self, host, port, service, user, pwd, arg):
+            self.host = host
+            self.port = port
+            self.service = service
+            self.user = user
+            self.pwd = pwd
+            self.arg = arg
 
-    def conn_oracle(self):
-        data = (spark.read \
-                .format("jdbc") \
-                .option("url",
-                        "jdbc:oracle:thin:@(DESCRIPTION="
-                        "(ADDRESS=(PROTOCOL=TCP)"
-                        "(HOST=" + self.host + ")" \
-                                               "(PORT=" + self.port + "))" \
-                                                                      "(CONNECT_DATA=(SERVER=DEDICATED)" \
-                                                                      "(SERVICE_NAME=" + self.service + ")))") \
-                .option("driver", "oracle.jdbc.driver.OracleDriver") \
-                .option("user", self.user) \
-                .option("password", self.pwd) \
-                .option("numPartitions", 4) \
-                .option("dbtable", self.arg)) \
-            .load()
+        def conn_oracle(self):
+            data = (spark.read \
+                    .format("jdbc") \
+                    .option("url",
+                            "jdbc:oracle:thin:@(DESCRIPTION="
+                            "(ADDRESS=(PROTOCOL=TCP)"
+                            "(HOST=" + self.host + ")" \
+                                                   "(PORT=" + self.port + "))" \
+                                                                          "(CONNECT_DATA=(SERVER=DEDICATED)" \
+                                                                          "(SERVICE_NAME=" + self.service + ")))") \
+                    .option("driver", "oracle.jdbc.driver.OracleDriver") \
+                    .option("user", self.user) \
+                    .option("password", self.pwd) \
+                    .option("numPartitions", 4) \
+                    .option("dbtable", self.arg)) \
+                .load()
 
-        return data
+            return data

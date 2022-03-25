@@ -12,7 +12,8 @@ class EabrCleansing(object):
                     .encode('ASCII', 'ignore') \
                     .decode('ASCII')
                 return rem
-            except:
+
+            except ValueError as e:
                 pass
 
     class Prepositions:
@@ -25,5 +26,6 @@ class EabrCleansing(object):
                 ajust_name = (' '.join(word if word in self.prepositions else word.title()
                                        for word in self.string.capitalize().split(' ')))
                 return ajust_name
-            except:
+
+            except ValueError as e:
                 pass

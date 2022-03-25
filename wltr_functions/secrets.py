@@ -1,13 +1,10 @@
-import ssl
 import json
 import boto3
 import base64
-import psycopg2
-import urllib.parse
 from botocore.exceptions import ClientError
 
 
-class EabrSecrets(object):
+class Secrets(object):
     class AWS:
         def __init__(self, secret, region):
             self.secret_name = secret

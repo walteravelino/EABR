@@ -30,3 +30,8 @@ urllib3
 webencodings
 zipp
 pyspark
+setuptools
+wheel
+pycrypto
+pycryptodome
+pycryptodomex
