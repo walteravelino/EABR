@@ -1,6 +1,6 @@
-# EABR Functions
-<a href="https://pypi.org/project/eabr-functions/">
-  <img alt="PyPI" src="https://img.shields.io/pypi/v/eabr-functions">
+# WLTR Functions
+<a href="https://pypi.org/project/wltr-functions/">
+  <img alt="PyPI" src="https://img.shields.io/pypi/v/wltr-functions">
 </a>
 
 [![Build Status](https://travis-ci.com/walteravelino/Projetos.svg?branch=master)](https://travis-ci.com/walteravelino/Projetos)
@@ -24,10 +24,10 @@ Os projetos estão sob a licença [MIT](https://github.com/walteravelino/Projeto
 
 Pacote para validação de documentos
 
-## Instalação do EABR Functions
+## Instalação do WLTR Functions
 
 Para instalar o pacote:
 
 ```bash
-pip install eabr-functions
+pip install wltr-functions
 ```
