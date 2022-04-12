@@ -1,5 +1,4 @@
 import pymongo
-import pymssql
 import psycopg2
 import cx_Oracle
 import urllib.parse
@@ -17,10 +16,11 @@ class Databases(object):
                 cnxn = cx_Oracle.connect(user=self.oracle_user,
                                          password=self.oracle_pwd,
                                          dsn=self.oracle_dsn)
-            except ValueError as e:
-                print(e)
 
-            return cnxn
+                return cnxn
+
+            except ValueError as e:
+                return print(e)
 
     class Redshift:
         def __init__(self, rs_db, rs_host, rs_port,
@@ -38,10 +38,11 @@ class Databases(object):
                                         port=self.rs_port,
                                         user=self.rs_user,
                                         password=self.rs_pwd)
-            except ValueError as e:
-                print(e)
 
-            return cnxn
+                return cnxn
+
+            except ValueError as e:
+                return print(e)
 
     class DocumentDB:
         def __init__(self, ddb_host, ddb_port, ddb_user,
@@ -63,35 +64,16 @@ class Databases(object):
                               tls=True,
                               tlsCAFile=self.ddb_public_key
                               )
+                return cnxn
 
             except ValueError as e:
-                print(e)
-
-            return cnxn
-
-    class SQLServer:
-        def __init__(self, sqls_host, sqls_user,
-                     sqls_pwd, sqls_db):
-            self.sqls_server = sqls_host
-            self.sqls_user = sqls_user
-            self.sqls_pwd = sqls_pwd
-            self.sqls_db = sqls_db
-
-        def conn_sqls(self):
-            try:
-                cnxn = pymssql.connect(server=self.sqls_host,
-                                       user=self.sqls_user,
-                                       password=self.sqls_pwd,
-                                       database=self.sqls_db)
-            except ValueError as e:
-                print(e)
-
-            return cnxn
+                return print(e)
 
 
 class SparkDatabases(object):
     class Oracle:
-        def __init__(self, host, port, service, user, pwd, arg):
+        def __init__(self, spark_instance, host, port, service, user, pwd, arg):
+            self.spark_instance = spark_instance
             self.host = host
             self.port = port
             self.service = service
@@ -100,20 +82,24 @@ class SparkDatabases(object):
             self.arg = arg
 
         def conn_oracle(self):
-            data = (spark.read \
-                    .format("jdbc") \
-                    .option("url",
-                            "jdbc:oracle:thin:@(DESCRIPTION="
-                            "(ADDRESS=(PROTOCOL=TCP)"
-                            "(HOST=" + self.host + ")" \
-                                                   "(PORT=" + self.port + "))" \
-                                                                          "(CONNECT_DATA=(SERVER=DEDICATED)" \
-                                                                          "(SERVICE_NAME=" + self.service + ")))") \
-                    .option("driver", "oracle.jdbc.driver.OracleDriver") \
-                    .option("user", self.user) \
-                    .option("password", self.pwd) \
-                    .option("numPartitions", 4) \
-                    .option("dbtable", self.arg)) \
-                .load()
+            try:
+                data = (self.spark_instance.read \
+                        .format("jdbc") \
+                        .option("url",
+                                "jdbc:oracle:thin:@(DESCRIPTION="
+                                "(ADDRESS=(PROTOCOL=TCP)"
+                                "(HOST=" + self.host + ")" \
+                                                       "(PORT=" + self.port + "))" \
+                                                                              "(CONNECT_DATA=(SERVER=DEDICATED)" \
+                                                                              "(SERVICE_NAME=" + self.service + ")))") \
+                        .option("driver", "oracle.jdbc.driver.OracleDriver") \
+                        .option("user", self.user) \
+                        .option("password", self.pwd) \
+                        .option("numPartitions", 4) \
+                        .option("dbtable", self.arg)) \
+                    .load()
 
-            return data
+                return data
+
+            except ValueError as e:
+                return print(e)

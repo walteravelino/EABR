@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="wltr-functions",
-    version="2.5.1",
+    version="2.6.4",
     author="Walter José Avelino da Silva",
     author_email="walter.avelin@gmail.com",
     description="WLTR Functions",
@@ -20,9 +20,6 @@ setuptools.setup(
         "psycopg2-binary",
         "cx-Oracle",
         "pymongo",
-        "pymssql",
-        "pycrypto",
-        "pycryptodome",
         "pycryptodomex"
     ],
     classifiers=[

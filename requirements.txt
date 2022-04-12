@@ -15,7 +15,6 @@ pkginfo
 psycopg2-binary
 Pygments
 pymongo
-pymssql
 pyparsing
 python-dateutil
 readme-renderer
@@ -32,6 +31,4 @@ zipp
 pyspark
 setuptools
 wheel
-pycrypto
-pycryptodome
 pycryptodomex
