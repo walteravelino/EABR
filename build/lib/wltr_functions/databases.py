@@ -103,36 +103,3 @@ class SparkDatabases(object):
 
             except ValueError as e:
                 return print(e)
-
-    class Informix:
-        def __init__(self, spark_instance, host, port, service, status, user, pwd, arg):
-            self.spark_instance = spark_instance
-            self.host = host
-            self.port = port
-            self.service = service
-            self.status = status
-            self.user = user
-            self.pwd = pwd
-            self.arg = arg
-
-        def conn_informix(self):
-            try:
-                data = (self.spark_instance.read \
-                        .format("jdbc") \
-                        .option("url",
-                                "jdbc:informix-sqli://"
-                                + self.host + ":" \
-                                + self.port + "/" \
-                                + self.service + "=" \
-                                + self.status) \
-                        .option("driver", "com.informix.jdbc.IfxDriver") \
-                        .option("user", self.user) \
-                        .option("password", self.pwd) \
-                        .option("numPartitions", 4) \
-                        .option("dbtable", self.arg)) \
-                    .load()
-
-                return data
-
-            except ValueError as e:
-                return print(e)
