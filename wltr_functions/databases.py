@@ -81,7 +81,7 @@ class SparkDatabases(object):
             self.pwd = pwd
             self.arg = arg
 
-        def conn_oracle(self):
+        def read_oracle(self):
             try:
                 data = (self.spark_instance.read \
                         .format("jdbc") \
@@ -98,6 +98,29 @@ class SparkDatabases(object):
                         .option("numPartitions", 4) \
                         .option("dbtable", self.arg)) \
                     .load()
+
+                return data
+
+            except ValueError as e:
+                return print(e)
+
+        def write_oracle(self):
+            try:
+                data = (self.spark_instance.write \
+                        .format("jdbc") \
+                        .option("url",
+                                "jdbc:oracle:thin:@(DESCRIPTION="
+                                "(ADDRESS=(PROTOCOL=TCP)"
+                                "(HOST=" + self.host + ")" \
+                                                       "(PORT=" + self.port + "))" \
+                                                                              "(CONNECT_DATA=(SERVER=DEDICATED)" \
+                                                                              "(SERVICE_NAME=" + self.service + ")))") \
+                        .option("driver", "oracle.jdbc.driver.OracleDriver") \
+                        .option("user", self.user) \
+                        .option("password", self.pwd) \
+                        .option("mode", "append") \
+                        .option("dbtable", self.arg)) \
+                    .save()
 
                 return data
 
