@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="wltr-functions",
-    version="2.9.0",
+    version="2.9.1",
     author="Walter José Avelino da Silva",
     author_email="walter.avelin@gmail.com",
     description="WLTR Functions",
