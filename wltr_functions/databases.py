@@ -119,8 +119,8 @@ class SparkDatabases(object):
                         .option("driver", "oracle.jdbc.driver.OracleDriver") \
                         .option("user", self.user) \
                         .option("password", self.pwd) \
-                        .option("mode", "append") \
                         .option("dbtable", self.arg)) \
+                    .mode("append") \
                     .save()
 
                 return data
