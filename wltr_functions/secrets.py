@@ -16,6 +16,8 @@ class Secrets(object):
             client = session.client(service_name='secretsmanager',
                                     region_name=self.region_name)
 
+            aws_secret = ''
+
             try:
                 get_secret_value_response = client.get_secret_value(SecretId=self.secret_name)
 
@@ -37,9 +39,9 @@ class Secrets(object):
 
             else:
                 if 'SecretString' in get_secret_value_response:
-                    secret = get_secret_value_response['SecretString']
+                    aws_secret = get_secret_value_response['SecretString']
 
                 else:
                     decoded_binary_secret = base64.b64decode(get_secret_value_response['SecretBinary'])
 
-            return json.loads(secret)
+            return json.loads(aws_secret)
