@@ -1,6 +1,7 @@
 import pymongo
 import psycopg2
 import cx_Oracle
+import jaydebeapi
 import urllib.parse
 
 
@@ -38,6 +39,29 @@ class Databases(object):
                                         port=self.rs_port,
                                         user=self.rs_user,
                                         password=self.rs_pwd)
+
+                return cnxn
+
+            except ValueError as e:
+                return print(e)
+
+    class JDBC:
+        def __init__(self, jdbc_host, jdbc_port, jdbc_db,
+                     jdbc_user, jdbc_pwd, jdbc_driver=None):
+            self.jdbc_host = jdbc_host,
+            self.jdbc_port = jdbc_port,
+            self.jdbc_db = jdbc_db,
+            self.jdbc_user = jdbc_user,
+            self.jdbc_pwd = jdbc_pwd,
+            self.jdbc_driver = jdbc_driver
+
+        def conn_oracle(self):
+            try:
+                cnxn = jaydebeapi.connect('oracle.jdbc.driver.OracleDriver',
+                                          'jdbc:oracle:thin:{}/{}}@{}:{}}/{}}',
+                                          jars='{}}'.format(self.jdbc_user, self.jdbc_pwd,
+                                                            self.jdbc_host, self.jdbc_db,
+                                                            self.jdbc_driver))
 
                 return cnxn
 
