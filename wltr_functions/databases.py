@@ -58,10 +58,10 @@ class Databases(object):
         def conn_oracle(self):
             try:
                 cnxn = jaydebeapi.connect('oracle.jdbc.driver.OracleDriver',
-                                          'jdbc:oracle:thin:{}/{}@{}:{}/{}',
-                                          jars='{}'.format(self.jdbc_user, self.jdbc_pwd,
-                                                           self.jdbc_host, self.jdbc_port,
-                                                           self.jdbc_db, self.jdbc_driver))
+                                          'jdbc:oracle:thin:{}/{}@{}:{}/{}'.format(self.jdbc_user, self.jdbc_pwd,
+                                                                                   self.jdbc_host, self.jdbc_port,
+                                                                                   self.jdbc_db),
+                                          jars=self.jdbc_driver)
 
                 return cnxn
 
