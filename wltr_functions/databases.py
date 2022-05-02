@@ -58,10 +58,12 @@ class Databases(object):
         def conn_oracle(self):
             try:
                 cnxn = jaydebeapi.connect('oracle.jdbc.driver.OracleDriver',
-                                          'jdbc:oracle:thin:{}/{}@{}:{}/{}'.format(self.jdbc_user, self.jdbc_pwd,
-                                                                                   self.jdbc_host, self.jdbc_port,
-                                                                                   self.jdbc_db),
-                                          jars=self.jdbc_driver)
+                                          'jdbc:oracle:thin:{}/{}@{}:{}/{}'.format(''.join(self.jdbc_user),
+                                                                                   ''.join(self.jdbc_pwd),
+                                                                                   ''.join(self.jdbc_host),
+                                                                                   ''.join(self.jdbc_port),
+                                                                                   ''.join(self.jdbc_db)),
+                                          jars=''.join(self.jdbc_driver))
 
                 return cnxn
 
@@ -96,7 +98,10 @@ class Databases(object):
 
 class SparkDatabases(object):
     class Oracle:
-        def __init__(self, spark_instance, host, port, service, user, pwd, arg, spark_data=None):
+        def __init__(self, spark_instance, host, port, service, user, pwd, arg,
+                     spark_data=None, write_mode='append', truncate=False,
+                     isolation_level='NONE', partitions=8,
+                     fetch_size=1000, batch_size=10000):
             self.spark_instance = spark_instance
             self.host = host
             self.port = port
@@ -105,6 +110,12 @@ class SparkDatabases(object):
             self.pwd = pwd
             self.arg = arg
             self.spark_data = spark_data
+            self.write_mode = write_mode
+            self.truncate = truncate
+            self.isolation_level = isolation_level
+            self.partitions = partitions
+            self.fetch_size = fetch_size
+            self.batch_size = batch_size
 
         def read_oracle(self):
             try:
@@ -120,8 +131,9 @@ class SparkDatabases(object):
                         .option("driver", "oracle.jdbc.driver.OracleDriver") \
                         .option("user", self.user) \
                         .option("password", self.pwd) \
-                        .option("numPartitions", 4) \
-                        .option("dbtable", self.arg)) \
+                        .option("numPartitions", self.partitions) \
+                        .option("dbtable", self.arg) \
+                        .option("fetchsize", self.fetch_size)) \
                     .load()
 
                 return data
@@ -143,8 +155,11 @@ class SparkDatabases(object):
                         .option("driver", "oracle.jdbc.driver.OracleDriver") \
                         .option("user", self.user) \
                         .option("password", self.pwd) \
-                        .option("dbtable", self.arg)) \
-                    .mode("append") \
+                        .option("dbtable", self.arg) \
+                        .option("batchsize", self.batch_size) \
+                        .option("truncate", self.truncate) \
+                        .option("isolationLevel", self.isolation_level) \
+                        .mode(self.write_mode)) \
                     .save()
 
                 return data
