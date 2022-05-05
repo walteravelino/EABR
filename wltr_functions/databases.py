@@ -119,20 +119,20 @@ class SparkDatabases(object):
 
         def read_oracle(self):
             try:
-                data = (self.spark_instance.read \
-                        .format("jdbc") \
+                data = (self.spark_instance.read
+                        .format("jdbc")
                         .option("url",
                                 "jdbc:oracle:thin:@(DESCRIPTION="
                                 "(ADDRESS=(PROTOCOL=TCP)"
-                                "(HOST=" + self.host + ")" \
-                                                       "(PORT=" + self.port + "))" \
-                                                                              "(CONNECT_DATA=(SERVER=DEDICATED)" \
-                                                                              "(SERVICE_NAME=" + self.service + ")))") \
-                        .option("driver", "oracle.jdbc.driver.OracleDriver") \
-                        .option("user", self.user) \
-                        .option("password", self.pwd) \
-                        .option("numPartitions", self.partitions) \
-                        .option("dbtable", self.arg) \
+                                "(HOST=" + self.host + ")"
+                                                       "(PORT=" + self.port + "))"
+                                                                              "(CONNECT_DATA=(SERVER=DEDICATED)"
+                                                                              "(SERVICE_NAME=" + self.service + ")))")
+                        .option("driver", "oracle.jdbc.driver.OracleDriver")
+                        .option("user", self.user)
+                        .option("password", self.pwd)
+                        .option("numPartitions", self.partitions)
+                        .option("dbtable", self.arg)
                         .option("fetchsize", self.fetch_size)) \
                     .load()
 
@@ -143,22 +143,22 @@ class SparkDatabases(object):
 
         def write_oracle(self):
             try:
-                data = (self.spark_data.write \
-                        .format("jdbc") \
+                data = (self.spark_data.write
+                        .format("jdbc")
                         .option("url",
                                 "jdbc:oracle:thin:@(DESCRIPTION="
                                 "(ADDRESS=(PROTOCOL=TCP)"
-                                "(HOST=" + self.host + ")" \
-                                                       "(PORT=" + self.port + "))" \
-                                                                              "(CONNECT_DATA=(SERVER=DEDICATED)" \
-                                                                              "(SERVICE_NAME=" + self.service + ")))") \
-                        .option("driver", "oracle.jdbc.driver.OracleDriver") \
-                        .option("user", self.user) \
-                        .option("password", self.pwd) \
-                        .option("dbtable", self.arg) \
-                        .option("batchsize", self.batch_size) \
-                        .option("truncate", self.truncate) \
-                        .option("isolationLevel", self.isolation_level) \
+                                "(HOST=" + self.host + ")"
+                                                       "(PORT=" + self.port + "))"
+                                                                              "(CONNECT_DATA=(SERVER=DEDICATED)"
+                                                                              "(SERVICE_NAME=" + self.service + ")))")
+                        .option("driver", "oracle.jdbc.driver.OracleDriver")
+                        .option("user", self.user)
+                        .option("password", self.pwd)
+                        .option("dbtable", self.arg)
+                        .option("batchsize", self.batch_size)
+                        .option("truncate", self.truncate)
+                        .option("isolationLevel", self.isolation_level)
                         .mode(self.write_mode)) \
                     .save()
 
@@ -180,18 +180,18 @@ class SparkDatabases(object):
 
         def conn_informix(self):
             try:
-                data = (self.spark_instance.read \
-                        .format("jdbc") \
+                data = (self.spark_instance.read
+                        .format("jdbc")
                         .option("url",
                                 "jdbc:informix-sqli://"
-                                + self.host + ":" \
-                                + self.port + "/" \
-                                + self.service + "=" \
-                                + self.status) \
-                        .option("driver", "com.informix.jdbc.IfxDriver") \
-                        .option("user", self.user) \
-                        .option("password", self.pwd) \
-                        .option("numPartitions", 4) \
+                                + self.host + ":"
+                                + self.port + "/"
+                                + self.service + "="
+                                + self.status)
+                        .option("driver", "com.informix.jdbc.IfxDriver")
+                        .option("user", self.user)
+                        .option("password", self.pwd)
+                        .option("numPartitions", 4)
                         .option("dbtable", self.arg)) \
                     .load()
 

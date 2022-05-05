@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="Zeppelin BI EDI DEV(http://localhost:8890)" uuid="ad04e337-083d-46c9-b017-5d930c2c033b">
+      <driver-ref>362bfa6b-9d74-4767-8000-cfd3a8375141</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.dbschema.ZeppelinSparkJdbcDriver</jdbc-driver>
+      <jdbc-url>Zeppelin connection@ZeppelinConnections@-1386433730082952151</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="Zeppelin BI EDI PRD(http://localhost:8890)" uuid="b92a0ed7-1a7f-4d9c-8240-64cfdf7413c8">
+      <driver-ref>3893b3df-5054-40ac-b325-c3acaf9bfd21</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.dbschema.ZeppelinSparkJdbcDriver</jdbc-driver>
+      <jdbc-url>Zeppelin connection@ZeppelinConnections@5391488832947422745</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+  </component>
+</project>
