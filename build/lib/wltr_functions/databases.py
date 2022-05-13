@@ -1,5 +1,4 @@
 import pymongo
-import psycopg2
 import cx_Oracle
 import jaydebeapi
 import urllib.parse
@@ -23,27 +22,27 @@ class Databases(object):
             except ValueError as e:
                 return print(e)
 
-    class Redshift:
-        def __init__(self, rs_db, rs_host, rs_port,
-                     rs_user, rs_pwd):
-            self.rs_db = rs_db
-            self.rs_host = rs_host
-            self.rs_port = int(rs_port)
-            self.rs_user = rs_user
-            self.rs_pwd = rs_pwd
-
-        def conn_redshift(self):
-            try:
-                cnxn = psycopg2.connect(dbname=self.rs_db,
-                                        host=self.rs_host,
-                                        port=self.rs_port,
-                                        user=self.rs_user,
-                                        password=self.rs_pwd)
-
-                return cnxn
-
-            except ValueError as e:
-                return print(e)
+    # class Redshift:
+    #     def __init__(self, rs_db, rs_host, rs_port,
+    #                  rs_user, rs_pwd):
+    #         self.rs_db = rs_db
+    #         self.rs_host = rs_host
+    #         self.rs_port = int(rs_port)
+    #         self.rs_user = rs_user
+    #         self.rs_pwd = rs_pwd
+    #
+    #     def conn_redshift(self):
+    #         try:
+    #             cnxn = psycopg2.connect(dbname=self.rs_db,
+    #                                     host=self.rs_host,
+    #                                     port=self.rs_port,
+    #                                     user=self.rs_user,
+    #                                     password=self.rs_pwd)
+    #
+    #             return cnxn
+    #
+    #         except ValueError as e:
+    #             return print(e)
 
     class JDBC:
         def __init__(self, jdbc_host, jdbc_port, jdbc_db,
