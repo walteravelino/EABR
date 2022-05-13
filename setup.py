@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="wltr-functions",
-    version="3.2.0",
+    version="3.2.1",
     author="Walter José Avelino da Silva",
     author_email="walter.avelin@gmail.com",
     description="WLTR Functions",
@@ -18,7 +18,6 @@ setuptools.setup(
         "botocore",
         "simple-salesforce",
         "email-validator",
-        "psycopg2-binary",
         "cx-Oracle",
         "pymongo",
         "pycryptodomex",

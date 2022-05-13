@@ -2,7 +2,6 @@ boto3
 botocore
 simple-salesforce
 email-validator
-psycopg2-binary
 cx-Oracle
 pymongo
 pycryptodomex

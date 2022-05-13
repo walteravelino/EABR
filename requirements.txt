@@ -12,7 +12,6 @@ jmespath
 keyring
 packaging
 pkginfo
-psycopg2-binary
 Pygments
 pymongo
 pyparsing
