@@ -5,4 +5,4 @@ email-validator
 cx-Oracle
 pymongo
 pycryptodomex
-JayDeBeApi
+psycopg2-binaryJayDeBeApi
