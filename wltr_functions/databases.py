@@ -129,6 +129,7 @@ class SparkDatabases(object):
                                                                               "(CONNECT_DATA=(SERVER=DEDICATED)"
                                                                               "(SERVICE_NAME=" + self.service + ")))")
                         .option("driver", "oracle.jdbc.driver.OracleDriver")
+                        .option("oracle.jdbc.timezoneAsRegion", "false")
                         .option("user", self.user)
                         .option("password", self.pwd)
                         .option("numPartitions", self.partitions)
