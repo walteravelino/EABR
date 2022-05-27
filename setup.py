@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="wltr-functions",
-    version="3.3.2",
+    version="3.3.3",
     author="Walter José Avelino da Silva",
     author_email="walter.avelin@gmail.com",
     description="WLTR Functions",
@@ -21,7 +21,7 @@ setuptools.setup(
         "cx-Oracle",
         "pymongo",
         "pycryptodomex",
-        "psycopg2-binary"
+        "psycopg2-binary",
         "JayDeBeApi",
     ],
     classifiers=[
